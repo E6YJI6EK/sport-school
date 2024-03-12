@@ -1,0 +1,14 @@
+.form {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  margin: auto;
+  justify-content: space-between;
+  height: calc(100vh - 235px);
+  & div {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    // width: 45%;
+  }
+}
