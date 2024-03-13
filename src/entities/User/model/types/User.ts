@@ -4,6 +4,12 @@ import { getGender } from "src/shared/lib/getGender";
 import { getUserType } from "src/shared/lib/getUserType";
 export interface UserState extends ResponseSchema {
   user: UserSchema;
+  achievements: Achievement[];
+}
+
+export interface Achievement {
+  description: string;
+  date: string;
 }
 
 export interface jwtObject {
@@ -37,7 +43,7 @@ export interface UserSchema {
 export type UserType = "coach" | "sportsman" | "admin";
 
 export class User {
-    public id?: string;
+  public id?: string;
   public name?: string;
   public lastName?: string;
   public patronymic?: string;

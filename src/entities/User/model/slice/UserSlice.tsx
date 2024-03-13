@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { jwtDecode } from "jwt-decode";
-import { User, UserState, jwtObject } from "../types/User";
+import { Achievement, User, UserState, jwtObject } from "../types/User";
 import { RouterPath } from "src/app/config/routerConfig";
 import { removeToken } from "src/shared/lib/removeToken";
 import { changePassword } from "../services/changePassword";
@@ -8,6 +8,9 @@ import { changeContactData } from "../services/changeContactData";
 import { getUser } from "../services/getUser";
 import { setUserData } from "src/shared/lib/setUserData";
 import { removeUserData } from "src/shared/lib/removeUserData";
+import { changeAchievements } from "../services/changeAchievements";
+import { getAchievements } from "../services/getAchievements";
+import { formatDate } from "src/shared/lib/formatDate";
 
 const initialState: UserState = {
   user: {
@@ -21,6 +24,7 @@ const initialState: UserState = {
     contactData: "",
     authorized: false,
   },
+  achievements: [],
 };
 
 export const UserSlice = createSlice({
@@ -96,6 +100,40 @@ export const UserSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(changePassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.message = action.error as string;
+      })
+      .addCase(changeAchievements.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(changeAchievements.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = action.payload.isSuccess;
+        state.isFailure = action.payload.isFailure;
+        state.message = action.payload.message;
+      })
+      .addCase(changeAchievements.rejected, (state, action) => {
+        state.isLoading = false;
+        state.message = action.error as string;
+      })
+      .addCase(getAchievements.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAchievements.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = action.payload.isSuccess;
+        state.isFailure = action.payload.isFailure;
+        state.message = action.payload.message;
+        const arr: Achievement[] = [];
+        action.payload.data.forEach((el:any) => {
+          arr.push({
+            date: formatDate(el.date) as string,
+            description: el.description,
+          });
+        });
+        state.achievements = arr;
+      })
+      .addCase(getAchievements.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.error as string;
       })

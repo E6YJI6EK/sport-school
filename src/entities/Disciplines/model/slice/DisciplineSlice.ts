@@ -35,10 +35,11 @@ export const DisciplineSlice = createSlice({
         state.isFailure = action.payload.isFailure;
         state.message = action.payload.message;
         state.list = [];
-        action.payload.data.forEach((elem:any) => {
+        action.payload.data.forEach((elem: any) => {
           state.list.push({
             name: elem.name,
             userId: elem.user_id,
+            id: elem.id,
           });
         });
       })

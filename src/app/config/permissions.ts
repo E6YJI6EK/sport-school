@@ -2,10 +2,12 @@ import { UserType } from "src/entities/User";
 
 export enum UserFunctions {
   CREATE_DISCIPLINES = "create-disciplines",
+  CREATE_WORKOUTS = 'create-workouts',
 }
 
-export const permissions: Record<string, Array<UserType>> = {
+export const permissions: Record<UserFunctions, Array<UserType>> = {
   [UserFunctions.CREATE_DISCIPLINES]: ["admin"],
+  [UserFunctions.CREATE_WORKOUTS]: ["admin", "coach"],
 };
 
 export const hasAccess = (

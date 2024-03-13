@@ -6,6 +6,7 @@ import { RouterPath } from "src/app/config/routerConfig";
 import { useDispatch, useSelector } from "react-redux";
 import {
   UserActions,
+  changeAchievements,
   changeContactData,
   changePassword,
   getUserId,
@@ -25,6 +26,8 @@ const ProfileEditPage = () => {
     oldPassword: "",
     newPassword: "",
     contactData: "",
+    date: null,
+    description: "",
   });
   // @ts-ignore
   const handleChange = (e) => {
@@ -61,6 +64,20 @@ const ProfileEditPage = () => {
     );
   };
 
+  const handleAchievementsChange = (e: any) => {
+    e.preventDefault();
+    if (!formData.date || !formData.description) {
+      alert("Вы заполнили не все поля");
+      return;
+    }
+    appDispatch(
+      changeAchievements({
+        date: formData.date,
+        description: formData.description,
+      })
+    );
+  };
+
   useEffect(() => {
     if (isSuccess) {
       alert(message);
@@ -82,7 +99,7 @@ const ProfileEditPage = () => {
       ) : (
         <form className={cls.form}>
           <div>
-            <Typography>Изменить пароль</Typography>
+            <Typography variant="h5">Изменить пароль</Typography>
             <TextField
               type="password"
               required
@@ -110,7 +127,7 @@ const ProfileEditPage = () => {
           </div>
 
           <div>
-            <Typography>Изменить контактные данные</Typography>
+            <Typography variant="h5">Изменить контактные данные</Typography>
             <TextField
               required
               name="contactData"
@@ -125,6 +142,42 @@ const ProfileEditPage = () => {
               color="primary"
             >
               Сохранить
+            </Button>
+          </div>
+
+          <div>
+            <Typography variant="h5">Достижения</Typography>
+            <TextField
+              name="date"
+              label="Дата"
+              type="date"
+              value={formData.date}
+              onChange={handleChange}
+              required
+              fullWidth
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              name="description"
+              label="Описание"
+              multiline
+              rows={4}
+              value={formData.description}
+              onChange={handleChange}
+              required
+              fullWidth
+              margin="normal"
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={handleAchievementsChange}
+            >
+              Добавить достижения
             </Button>
           </div>
         </form>

@@ -58,6 +58,28 @@ const MainPage = memo(() => {
                 </Button>
               </RouterLink>
             )}
+            <RouterLink to={RouterPath.schedule}>
+              <Button
+                className={cls.btn}
+                variant="outlined"
+                color="primary"
+                size="large"
+              >
+                Тренировки
+              </Button>
+            </RouterLink>
+            {hasAccess(UserFunctions.CREATE_WORKOUTS, userType) && (
+              <RouterLink to={RouterPath.workoutCreation}>
+                <Button
+                  className={cls.btn}
+                  variant="outlined"
+                  color="primary"
+                  size="large"
+                >
+                  Добавить тренировку
+                </Button>
+              </RouterLink>
+            )}
           </div>
         </>
       ) : (

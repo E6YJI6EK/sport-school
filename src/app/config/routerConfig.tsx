@@ -3,9 +3,11 @@ import DisciplinesPage from "src/pages/DisciplinesPage";
 import MainPage from "src/pages/MainPage";
 import NotFoundPage from "src/pages/NotFoundPage";
 import ProfileEditPage from "src/pages/ProfileEditPage";
+import SchedulePage from "src/pages/SchedulePage";
 import SignInPage from "src/pages/SignInPage";
 import SignUpPage from "src/pages/SignUpPage";
 import UserProfilePage from "src/pages/UserPage";
+import WorkoutCreationPage from "src/pages/WorkoutCreationPage";
 
 export enum Routes {
   MAIN = "main",
@@ -14,6 +16,8 @@ export enum Routes {
   USER_PROFILE = "userProfile",
   EDIT_PROFILE = "editProfile",
   DISCIPLINES = "disciplines",
+  SCHEDULE = "schedule",
+  WORKOUT_CREATION = "workoutCreation",
   PAGE404 = "notFound",
 }
 
@@ -24,6 +28,8 @@ export const RouterPath: Record<Routes, string> = {
   [Routes.USER_PROFILE]: "/user",
   [Routes.EDIT_PROFILE]: "/edit-profile",
   [Routes.DISCIPLINES]: "/disciplines",
+  [Routes.SCHEDULE]: "/schedule",
+  [Routes.WORKOUT_CREATION]: "/workout-creation",
   [Routes.PAGE404]: "/*",
 };
 
@@ -56,6 +62,14 @@ export const routerConfig: Record<Routes, Route> = {
     path: RouterPath.disciplines,
     element: <DisciplinesPage />,
     isPrivate: true,
+  },
+  [Routes.SCHEDULE]: {
+    path: RouterPath.schedule,
+    element: <SchedulePage />,
+  },
+  [Routes.WORKOUT_CREATION]: {
+    path: RouterPath.workoutCreation,
+    element: <WorkoutCreationPage />,
   },
   [Routes.PAGE404]: {
     path: RouterPath.notFound,

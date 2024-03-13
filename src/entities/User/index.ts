@@ -1,4 +1,4 @@
-import { User, UserSchema } from "./model/types/User";
+import { User, UserSchema, Achievement } from "./model/types/User";
 import { UserActions, UserReducer } from "./model/slice/UserSlice";
 import { getUserState } from "./model/selectors/getUserState";
 import { getUserLogin } from "./model/selectors/getUserLogin";
@@ -10,6 +10,9 @@ import { getUserType } from "./model/selectors/getUserType";
 import { changePassword } from "./model/services/changePassword";
 import { changeContactData } from "./model/services/changeContactData";
 import { UserType } from "./model/types/User";
+import { changeAchievements } from "./model/services/changeAchievements";
+import { getAchievements } from "./model/services/getAchievements";
+import { getUserAchievements } from "./model/selectors/getUserAchievements";
 
 export {
   User,
@@ -23,6 +26,9 @@ export {
   getUserResponseState,
   getUserId,
   getUser,
-  getUserType
+  getUserType,
+  changeAchievements,
+  getAchievements,
+  getUserAchievements
 };
-export type { UserSchema, UserType };
+export type { UserSchema, UserType, Achievement };

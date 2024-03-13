@@ -8,6 +8,7 @@ import { Tuple } from "@reduxjs/toolkit";
 import { thunk } from "redux-thunk";
 import { UserReducer } from "src/entities/User";
 import { DisciplineReducer } from "src/entities/Disciplines";
+import { WorkoutsReducer } from "src/entities/Workouts";
 
 export function createReduxStore(initialState?: StateSchema) {
   const rootReducers: ReducersMapObject<StateSchema> = {
@@ -15,6 +16,7 @@ export function createReduxStore(initialState?: StateSchema) {
     SignInSchema: SignInReducer,
     UserState: UserReducer,
     DisciplineState: DisciplineReducer,
+    WorkoutsState: WorkoutsReducer,
   };
   return configureStore<StateSchema>({
     reducer: rootReducers,

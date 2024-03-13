@@ -19,8 +19,6 @@ const DisciplineList: FC<DisciplineListProps> = (props) => {
 
   const getCoachNameById = (id: string): string => {
     if (coaches.length > 0) {
-        console.log(list);
-        console.log(id);
       const coach = coaches.find((coach) => coach.id === id);
       if (coach) {
         return [coach.last_name, coach.name, coach.patronymic].join(" ");
